@@ -1,5 +1,6 @@
 import pickle
 import streamlit as st
+import numpy as np
 
 pipe = pickle.load(open('pipe.pkl', 'rb'))
 df = pickle.load(open('df.pkl', 'rb'))
@@ -56,7 +57,7 @@ if st.button('Predict Price'):
     X_res = int(resolution.split('x')[0])
     Y_res = int(resolution.split('x')[1])
     ppi = ((X_res ** 2) + (Y_res ** 2)) ** 0.5 / screen_size
-    query = np.array([company, typename, ram, weight, touchscreen, ips, ppi, cpu, hdd, sdd, gpu, os])
+    query = np.array([company, typename, ram, weight, touchscreen, ips, ppi, cpu, hdd, ssd, gpu, os])
 
     query = query.reshape(1, 12)
     st.title(int(np.exp(pipe.predict(query)[0])))
